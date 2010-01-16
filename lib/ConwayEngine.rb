@@ -14,7 +14,7 @@ The initial pattern constitutes the seed of the system. The first generation is 
 class ConwayEngine
   attr_accessor :cells
 #Create a new ConwayEngine. Pass width and height of the cell world
-def initialize(width=30, height=30, random=true)
+def initialize(width=30, height=30, random=true, random_from=[true,false])
   #create an array 
   @cells = Array.new()
   @old_cell_state=nil
@@ -24,7 +24,7 @@ def initialize(width=30, height=30, random=true)
    #add 'height' arrays of size 'width'
   height.times do
     if random # fill it with random arrays   
-      new_element =  (0...width).map{[true,false][rand(2)]} #random cohoice between [true,false]
+      new_element =  (0...width).map{random_from[rand(random_from.size)]} #random cohoice between [true,false]
     
       #fill  borders 
       new_element[0]=border
@@ -44,10 +44,20 @@ end
 # calculate the generation n+1 
 def iterate()
   @old_cell_state = @cells.clone
+  @old_cell_state.each_index do |index_y|
+    if(index_y > 0 and index_y <@old_cell_state.size-1) #leave border out
+      @old_cell_state[index_y].each_index do |index_x|
+        if(index_x > 0 and index_x < @old_cell_state[index_y].size-1) #leave border out
+          @cells[index_y][index_x] = evolve(@old_cell_state[index_y][index_x], count_neighbors(index_y, index_x))
+        end
+      end
+    end
+  end
+=begin  
   y=0
   @old_cell_state.each do |row|
     x=0
-    if(y>0 and y<@cells.size-1) #don't process the border
+    if(y>0 and y<@old_cell_state.size-1) #don't process the border
       row.each do |single_cell|
         #single_cell = ... # doesn't work, since single_cell is block local in ruby 1.9
         if (x > 0 and x < row.size-1) #don't process the border
@@ -60,6 +70,7 @@ def iterate()
     end
     y+=1
   end
+=end
 end
 def printCells
   @cells.each do |row|
@@ -109,7 +120,7 @@ end
 end
 
 if __FILE__ == $0
-  freshConwayEngine = ConwayEngine.new(30,30)
+  freshConwayEngine = ConwayEngine.new(100,50)
   input='n'
   500.times {freshConwayEngine.iterate()}
   while true do

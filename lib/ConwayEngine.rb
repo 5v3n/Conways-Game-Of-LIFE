@@ -1,4 +1,5 @@
 #logic for Conways game of life.
+class ConwayEngine
 =begin
 The universe of the Game of Life is an infinite two-dimensional orthogonal grid of square cells, each of which is in one of two possible states, live or dead. Every cell interacts with its eight neighbors, which are the cells that are directly horizontally, vertically, or diagonally adjacent. At each step in time, the following transitions occur:
 
@@ -10,8 +11,6 @@ The universe of the Game of Life is an infinite two-dimensional orthogonal grid 
 The initial pattern constitutes the seed of the system. The first generation is created by applying the above rules simultaneously to every cell in the seed—births and deaths happen simultaneously, and the discrete moment at which this happens is sometimes called a tick (in other words, each generation is a pure function of the one before). The rules continue to be applied repeatedly to create further generations.
 =end
 
-
-class ConwayEngine
   attr_accessor :cells
 #Create a new ConwayEngine. Pass width and height of the cell world
 def initialize(width=30, height=30, random=true, random_from=[true,false].to_a)

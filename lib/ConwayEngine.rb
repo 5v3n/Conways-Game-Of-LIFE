@@ -14,12 +14,10 @@ The initial pattern constitutes the seed of the system. The first generation is 
 class ConwayEngine
   attr_accessor :cells
 #Create a new ConwayEngine. Pass width and height of the cell world
-def initialize(width=30, height=30, random=true, random_from=[true,false])
+def initialize(width=30, height=30, random=true, random_from=[true,false].to_a)
   #create an array 
   @cells = Array.new()
-  @old_cell_state=nil
   border = false
- 
   
    #add 'height' arrays of size 'width'
   height.times do
@@ -35,96 +33,126 @@ def initialize(width=30, height=30, random=true, random_from=[true,false])
     end
     @cells.push new_element
   end
+  
 
   #draw border
   @cells[0]= Array.new(width,border)
   @cells[-1]= Array.new(width,border)
   
 end
-# calculate the generation n+1 
-def iterate()
-  @old_cell_state = @cells.clone
-  @old_cell_state.each_index do |index_y|
-    if(index_y > 0 and index_y <@old_cell_state.size-1) #leave border out
-      @old_cell_state[index_y].each_index do |index_x|
-        if(index_x > 0 and index_x < @old_cell_state[index_y].size-1) #leave border out
-          @cells[index_y][index_x] = evolve(@old_cell_state[index_y][index_x], count_neighbors(index_y, index_x))
-        end
-      end
-    end
-  end
-=begin  
-  y=0
-  @old_cell_state.each do |row|
-    x=0
-    if(y>0 and y<@old_cell_state.size-1) #don't process the border
-      row.each do |single_cell|
-        #single_cell = ... # doesn't work, since single_cell is block local in ruby 1.9
-        if (x > 0 and x < row.size-1) #don't process the border
-          #watch out: if y is the height, it's the first array's index!
-          new_cell_state = evolve(single_cell, count_neighbors(y,x)) 
-          @cells[y][x] = new_cell_state 
-        end   
-        x += 1
-      end
-    end
-    y+=1
-  end
-=end
-end
-def printCells
-  @cells.each do |row|
+
+ 
+def printCells(array)
+  array.each do |row|
     row.each do |element|
-      print "+" if element
-      print "-" if not element
+      print "o" if element == true
+      print "." if element == false
     end
      print "\n"
   end
 end
+# calculate the generation n+1 
+def iterate()
+   new_cells = Array.new(@cells.size,false).map!{ Array.new(@cells.first.size,false) }
+   @cells.each_with_index do |row, y|
+     if(y > 0 and y <@cells.size-1) #leave border out
+       row.each_with_index do |entry, x|
+         if(x > 0 and x < row.size-1) #leave border out
+           neighbor_count = count_neighbors(y,x,@cells)
+           new_cells[y][x] = evolve(entry, neighbor_count)
+         end
+       end
+     end
+   end
+   @cells = new_cells.clone
+end
 
-#Count the neighbors of a 2d orthogonal grid. Uses the concept of the N_8(P)-neighborhood
-def count_neighbors(x,y)
+
+#Count the neighbors of a 2d orthogonal grid. Uses the concept of the N_8(P)-neighborhood (Moore-neighborhood)
+def count_neighbors(x,y,cells)
   counter=0
-  counter += 1 if @cells[x+1][y-1]
-  counter += 1 if @cells[x+1][y]  
-  counter += 1 if @cells[x+1][y+1]
-  counter += 1 if @cells[x][y+1]
-  counter += 1 if @cells[x-1][y+1]
-  counter += 1 if @cells[x-1][y]
-  counter += 1 if @cells[x-1][y-1] 
-  counter += 1 if @cells[x][y-1]
+  counter += 1 if cells[x+1][y-1]
+  counter += 1 if cells[x+1][y]  
+  counter += 1 if cells[x+1][y+1]
+  counter += 1 if cells[x][y+1]
+  counter += 1 if cells[x-1][y+1]
+  counter += 1 if cells[x-1][y]
+  counter += 1 if cells[x-1][y-1] 
+  counter += 1 if cells[x][y-1]
 
   counter
 end
 #determine the n+1 state of a single cell according to it's neighbors count
 def evolve(cell, neighbors)
-  cell_is_alive=cell #if there's no matching condition, don't change the cell's state
+  new_cell = cell
   if cell==true
     case
     when neighbors < 2
-      cell_is_alive = false #  1. Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.
+      new_cell = false #  1. Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.
     when neighbors > 3
-      cell_is_alive = false #  2. Any live cell with more than three live neighbours dies, as if by overcrowding.
+      new_cell = false #  2. Any live cell with more than three live neighbours dies, as if by overcrowding.
     when (neighbors == 2 or neighbors == 3)
-      cell_is_alive = true #  3. Any live cell with two or three live neighbours lives on to the next generation.
+      new_cell = true #  3. Any live cell with two or three live neighbours lives on to the next generation.
     end
   elsif cell==false
     if neighbors == 3
-     cell_is_alive = true # 4. Any dead cell with exactly three live neighbours becomes a live cell.
+     new_cell = true # 4. Any dead cell with exactly three live neighbours becomes a live cell.
     end
-  end 
-  cell_is_alive  
+  end
+  new_cell
 end
 
 
 end
 
 if __FILE__ == $0
-  freshConwayEngine = ConwayEngine.new(100,50)
-  input='n'
-  500.times {freshConwayEngine.iterate()}
+  
+  ten_cell_row =[
+    [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+    [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+     [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+     [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+     [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+     [false,false,false,false,false,false,false,false,false,false,true,true,true,true,true,true,true,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+     [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+     [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+     [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+     [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+     [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+     ]
+  
+           ten_cell_row_next =[
+     [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+     [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+     [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+     [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+     [false,false,false,false,false,false,false,false,false,false,false,true,true,true,true,true,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+     [false,false,false,false,false,false,false,false,false,false,false,true,true,true,true,true,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+     [false,false,false,false,false,false,false,false,false,false,false,true,true,true,true,true,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+     [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+     [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+     [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+     [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+     ]
+  
+  freshConwayEngine = ConwayEngine.new(120,50)
+  #freshConwayEngine.cells = ten_cell_row
+=begin  
+  cells = freshConwayEngine.cells
+  x=5
+  y=2
+  cells[x+1][y-1]=true
+  cells[x+1][y]  =true
+  cells[x+1][y+1]=true
+  cells[x][y+1]=true
+  cells[x-1][y+1]=true
+  cells[x-1][y]=true
+  cells[x-1][y-1] =true
+  cells[x][y-1]=true
+=end
+  #500.times {freshConwayEngine.iterate()}
   while true do
-    freshConwayEngine.printCells
+    freshConwayEngine.printCells(freshConwayEngine.cells)
     puts "Press 'Q' to quit, return to continue"
     input = gets
     break if "Q\n" == input

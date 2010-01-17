@@ -137,27 +137,18 @@ if __FILE__ == $0
   
   freshConwayEngine = ConwayEngine.new(120,50)
   #freshConwayEngine.cells = ten_cell_row
-=begin  
-  cells = freshConwayEngine.cells
-  x=5
-  y=2
-  cells[x+1][y-1]=true
-  cells[x+1][y]  =true
-  cells[x+1][y+1]=true
-  cells[x][y+1]=true
-  cells[x-1][y+1]=true
-  cells[x-1][y]=true
-  cells[x-1][y-1] =true
-  cells[x][y-1]=true
-=end
-  #500.times {freshConwayEngine.iterate()}
+
+  
+  runs = 500
+  runs.times {freshConwayEngine.iterate()}
   while true do
     freshConwayEngine.printCells(freshConwayEngine.cells)
-    puts "Press 'Q' to quit, return to continue"
+    puts "Tick #{runs} \nPress 'Q' to quit, return to continue"
     input = gets
     break if "Q\n" == input
     freshConwayEngine.iterate()
     system("clear")
+    runs += 1
   end
   
 end

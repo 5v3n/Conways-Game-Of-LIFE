@@ -1,0 +1,7 @@
+* design a decorator mechanism for printing
+  * e.g. conwayTextPrinter(myConwayEngine), conwayGUI(myConwayEngine), etc.
+* think about increasing
+  * encapsulation
+  * decoupling
+* System
+  * get ruby-opengl running! Mess with ruby 1.8 & 1.9?

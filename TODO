@@ -3,8 +3,13 @@
 * think about increasing
   * encapsulation
   * decoupling
-* think about
+* think about more ruby-like techniques:
   * using symbols instead of boolen (:alive instead of true)
-  * performance-impact? Symbol comparison is O(1)
+    * performance-impact? Symbol comparison is O(1)
+        * 120x50:
+          *65.4609653684464 ticks/sec (true/false)
+          *(:alive/:dead)
+  * using map! instead of each_with_index
+  * use inject where adequate
 * System
-  * get ruby-opengl running! Mess with ruby 1.8 & 1.9?
+  * get ruby-opengl running! Mess betwenn ruby 1.8 & 1.9?

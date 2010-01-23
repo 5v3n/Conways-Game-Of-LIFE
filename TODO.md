@@ -14,8 +14,8 @@
     * tell don't ask
         * use objects for cells & grid
             * performance-impact?
-                * "more" precedural : 70 ticks/sec @120x50
-                * "true oo"         : 30.57 ticks/sec @ 120x50
+                * "more" precedural : 69.58 ticks/sec @ 120x50
+                * "cleaner" oo      : 30.57 ticks/sec @ 120x50
 * System
   * get ruby-opengl running! Seems messed up with ruby 1.8 & 1.9 & corresponding gems
 * fix "benchmark" showing stats every run, not only if the benchmark was involved

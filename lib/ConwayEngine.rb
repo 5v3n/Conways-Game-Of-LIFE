@@ -43,7 +43,6 @@ end
 # calculate the generation n+1 
 def iterate()
    new_cells = Array.new(self.height, Cell.new(false)).map!{ Array.new(self.width,Cell.new(false)) }
-   puts "before: new: #{new_cells.object_id}, instance: #{@grid.cells.object_id}"
    
    @grid.cells.each_with_index do |row, y|
      if(y > 0 and y <self.height-1) #leave border out
@@ -51,29 +50,12 @@ def iterate()
          if(x > 0 and x < self.width-1) #leave border out
            cell.neighbors = count_neighbors(y,x,@grid.cells)
            new_cells[y][x] = evolve(cell)
-             puts "in the middle: new: #{new_cells.object_id}, instance: #{@grid.cells.object_id}"
+         end
+       end
+     end
+   end
+   @grid.cells = new_cells.clone
  
-         end
-       end
-     end
-   end
-   @grid.cells = new_cells.clone
-   puts "after: new: #{new_cells.object_id}, instance: #{@grid.cells.object_id}"
-
-=begin
- new_cells = Array.new(@grid.cells.size,Cell.new(false)).map!{ Array.new(@grid.cells.first.size,Cell.new(false)) }
-   @grid.cells.each_with_index do |row, y|
-     if(y > 0 and y <@grid.cells.size-1) #leave border out
-       row.each_with_index do |entry, x|
-         if(x > 0 and x < row.size-1) #leave border out
-           neighbor_count = count_neighbors(y,x,@grid.cells)
-           new_cells[y][x] = evolve(entry, neighbor_count)
-         end
-       end
-     end
-   end
-   @grid.cells = new_cells.clone
-=end
 end
 
 

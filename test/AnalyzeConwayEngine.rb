@@ -9,13 +9,14 @@ if __FILE__ == $0
  
   freshConwayEngine = ConwayEngine.new(120,50)
   benchmark = true 
-  runs = 0#100
+  runs = 100
   repeats = 10
   
   bm_results = []
   
   if benchmark
     repeats.times do
+      freshConwayEngine = ConwayEngine.new(120,50)
       bm_results << Benchmark.measure {  runs.times {freshConwayEngine.iterate()} } 
     end
   end
@@ -38,6 +39,7 @@ if __FILE__ == $0
      [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
      [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
      ]
+    if $DEBUG
     
     puts "before: size, height: #{freshConwayEngine.grid.cells.size}, #{freshConwayEngine.height}"
     puts "before: first.size, width: #{freshConwayEngine.grid.cells.first.size}, #{freshConwayEngine.width}"
@@ -51,11 +53,11 @@ if __FILE__ == $0
     p ten_cell_row.object_id
     print " ?= "
     p freshConwayEngine.grid.cells.object_id
-  
+    end
   tick = 0
   while true do
     freshConwayEngine.printCells(freshConwayEngine)
-    puts "Just did #{tick} ticks repeated #{repeats} times, which took #{result} secs. We're running about #{(repeats*runs) / result} ticks/sec" unless runs==0
+    puts "Just did #{runs} ticks repeated #{repeats} times, which took #{result} secs. We're running about #{(repeats*runs) / result} ticks/sec @ #{freshConwayEngine.width}x#{freshConwayEngine.height}" if benchmark
     puts "Tick #{tick} \nPress 'Q' to quit, return to continue" # TODO fix runs number: seperate runs & repeats in benchmark from the actual generation/tick count. count in ConwayEngine?
     input = gets
     break if "Q\n" == input

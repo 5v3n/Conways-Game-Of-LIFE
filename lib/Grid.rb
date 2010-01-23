@@ -26,6 +26,7 @@ class Grid
     #draw border
     @cells[0]= Array.new(@width,Cell.new(border))
     @cells[-1]= Array.new(@width,Cell.new(border))
+    @cells
   end
   def cells=(new_cells)
     @cells=new_cells

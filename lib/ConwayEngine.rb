@@ -41,7 +41,7 @@ def initialize(width=30, height=30, random=true, random_from=[true,false].to_a)
 end
 
  
-def printCells(array)
+def printCells(array=self.cells)
   array.each do |row|
     row.each do |element|
       print "o " if element == true
@@ -108,7 +108,7 @@ if __FILE__ == $0
   
   tick=0
   
-  width = 120 
+  width = 80 
   height = 50 
   
   width = ARGV[0].to_i unless ARGV[0] == nil
@@ -116,7 +116,7 @@ if __FILE__ == $0
   
   engine = ConwayEngine.new(width, height)
   while true do
-    engine.printCells(engine.cells)
+    engine.printCells()
     puts "Tick #{tick} \nPress 'Q' to quit, return to continue"
     input = STDIN.gets
     break if "Q\n" == input

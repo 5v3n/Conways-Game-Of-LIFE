@@ -30,12 +30,11 @@ def height()
 end
 
  
-def printCells(conway_engine)
-  array = conway_engine.grid.cells #TODO catch 'npe'
-  array.each do |row|
+def printCells(cells=self.grid.cells)
+  cells.each do |row|
     row.each do |cell|
-      print "o" if cell.alive?
-      print "." if !cell.alive? 
+      print "o " if cell.alive?
+      print ". " if !cell.alive? 
     end
      print "\n"
   end
@@ -99,3 +98,25 @@ end
 
 
   
+if __FILE__ == $0
+  
+  tick=0
+  
+  width = 80 
+  height = 50 
+  
+  width = ARGV[0].to_i unless ARGV[0] == nil
+  height = ARGV[1].to_i unless ARGV[1] == nil
+  
+  engine = ConwayEngine.new(width, height)
+  while true do
+    engine.printCells()
+    puts "Tick #{tick} \nPress 'Q' to quit, return to continue"
+    input = STDIN.gets
+    break if "Q\n" == input
+    engine.iterate()
+    system("clear")
+    tick += 1
+  end
+  
+end

@@ -56,7 +56,7 @@ if __FILE__ == $0
     end
   tick = 0
   while true do
-    freshConwayEngine.printCells(freshConwayEngine)
+    freshConwayEngine.printCells()
     puts "Just did #{runs} ticks repeated #{repeats} times, which took #{result} secs. We're running about #{(repeats*runs) / result} ticks/sec @ #{freshConwayEngine.width}x#{freshConwayEngine.height}" if benchmark
     puts "Tick #{tick} \nPress 'Q' to quit, return to continue" # TODO fix runs number: seperate runs & repeats in benchmark from the actual generation/tick count. count in ConwayEngine?
     input = gets

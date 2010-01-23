@@ -1,19 +1,19 @@
 #Unit tests for the ConwayEngine
 
 require_relative '../lib/ConwayEngine.rb'
-require_relative '../lib/Grid.rb'
 require 'test/unit'
 
 class TestConwayEngine < Test::Unit::TestCase
-    HEIGHT=50
-    WIDTH=120
-  
   def test_initialize
-
+    x=60
+    y=90
+    freshConwayEngine = ConwayEngine.new()
+    assert_equal(freshConwayEngine.cells.size, 30)
+    assert_equal(freshConwayEngine.cells[0].size, 30)
     
-    freshConwayEngine = ConwayEngine.new(WIDTH, HEIGHT)
-    assert_equal(freshConwayEngine.height, 50)
-    assert_equal(freshConwayEngine.width, 120)
+    freshConwayEngine = ConwayEngine.new(x,y)
+    assert_equal(freshConwayEngine.cells.size, y)
+    assert_equal(freshConwayEngine.cells[0].size, x)   
   end
 
   def test_count_neighbors_full
@@ -22,9 +22,8 @@ class TestConwayEngine < Test::Unit::TestCase
     [true,true,true],
     [true,true,true], 
     ]
-    freshConwayEngine = ConwayEngine.new(WIDTH, HEIGHT)
-    Grid.convertFromBooleanGridtoCellGrid!(test_cells)
-    #freshConwayEngine.grid.cells = test_cells
+    freshConwayEngine = ConwayEngine.new()
+    freshConwayEngine.cells = test_cells
     assert_equal(8, freshConwayEngine.count_neighbors(1,1, test_cells))
   end
   def test_count_neighbors_empty
@@ -33,9 +32,8 @@ class TestConwayEngine < Test::Unit::TestCase
     [false,true,false],
     [false,false,false], 
     ]
-    freshConwayEngine = ConwayEngine.new(WIDTH, HEIGHT)
-    Grid.convertFromBooleanGridtoCellGrid!(test_cells)
-    #freshConwayEngine.cells = test_cells
+          freshConwayEngine = ConwayEngine.new()
+    freshConwayEngine.cells = test_cells
     assert_equal(0, freshConwayEngine.count_neighbors(1,1, test_cells))
   end
   def test_count_neighbors_two
@@ -44,34 +42,33 @@ class TestConwayEngine < Test::Unit::TestCase
     [false,false,false],
     [false,false,true], 
     ]
-    freshConwayEngine = ConwayEngine.new(WIDTH, HEIGHT)
-    Grid.convertFromBooleanGridtoCellGrid!(test_cells)
-    #freshConwayEngine.cells = test_cells
+    freshConwayEngine = ConwayEngine.new()
+    freshConwayEngine.cells = test_cells
     assert_equal(2, freshConwayEngine.count_neighbors(1,1, test_cells))
   end
 
   def test_evolve_die
-    freshConwayEngine = ConwayEngine.new(WIDTH, HEIGHT)
-    cell = Cell.new(true)
+    freshConwayEngine = ConwayEngine.new()
+    cell = true
     #  1. Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.
-    assert_equal(false, freshConwayEngine.evolve(cell,0).alive?)
-    assert_equal(false, freshConwayEngine.evolve(cell,1).alive?)
+    assert_equal(false, freshConwayEngine.evolve(cell,0))
+    assert_equal(false, freshConwayEngine.evolve(cell,1))
     #     2. Any live cell with more than three live neighbours dies, as if by overcrowding.
-    assert_equal(false, freshConwayEngine.evolve(cell,4).alive?)
-    assert_equal(false, freshConwayEngine.evolve(cell,5).alive?)
-    assert_equal(false, freshConwayEngine.evolve(cell,6).alive?)
-    assert_equal(false, freshConwayEngine.evolve(cell,7).alive?)
-    assert_equal(false, freshConwayEngine.evolve(cell,8).alive?)
+    assert_equal(false, freshConwayEngine.evolve(cell,4))
+    assert_equal(false, freshConwayEngine.evolve(cell,5))
+    assert_equal(false, freshConwayEngine.evolve(cell,6))
+    assert_equal(false, freshConwayEngine.evolve(cell,7))
+    assert_equal(false, freshConwayEngine.evolve(cell,8))
   end
   def test_evolve_live
-    freshConwayEngine = ConwayEngine.new(WIDTH, HEIGHT)
+    freshConwayEngine = ConwayEngine.new()
     # 3. Any live cell with two or three live neighbours lives on to the next generation.
-    cell = Cell.new(true)
-    assert_equal(true, freshConwayEngine.evolve(cell,2).alive?)
-    assert_equal(true, freshConwayEngine.evolve(cell,3).alive?)
+    cell = true
+    assert_equal(true, freshConwayEngine.evolve(cell,2))
+    assert_equal(true, freshConwayEngine.evolve(cell,3))
     # 4. Any dead cell with exactly three live neighbours becomes a live cell.
-    cell = Cell.new(false)
-    assert_equal(true, freshConwayEngine.evolve(cell,3).alive?)
+    cell = false
+    assert_equal(true, freshConwayEngine.evolve(cell,3))
 
   end
   def test_iterate
@@ -103,12 +100,10 @@ class TestConwayEngine < Test::Unit::TestCase
      [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
      ]
       
-      freshConwayEngine = ConwayEngine.new(WIDTH, HEIGHT)
-      Grid.convertFromBooleanGridtoCellGrid!(ten_cell_row)
-      Grid.convertFromBooleanGridtoCellGrid!(ten_cell_row_next)    
-      freshConwayEngine.grid.cells = ten_cell_row
+      freshConwayEngine = ConwayEngine.new()
+      freshConwayEngine.cells = ten_cell_row
       freshConwayEngine.iterate()
-      assert_equal(freshConwayEngine.grid.cells, ten_cell_row_next)
+      assert_equal(freshConwayEngine.cells, ten_cell_row_next)
       
       
   end

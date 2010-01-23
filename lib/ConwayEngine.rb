@@ -47,10 +47,10 @@ def iterate()
    
    @grid.cells.each_with_index do |row, y|
      if(y > 0 and y <self.height-1) #leave border out
-       row.each_with_index do |entry, x|
+       row.each_with_index do |cell, x|
          if(x > 0 and x < self.width-1) #leave border out
-           neighbor_count = count_neighbors(y,x,@grid.cells)
-           new_cells[y][x] = evolve(entry, neighbor_count)
+           cell.neighbors = count_neighbors(y,x,@grid.cells)
+           new_cells[y][x] = evolve(cell)
              puts "in the middle: new: #{new_cells.object_id}, instance: #{@grid.cells.object_id}"
  
          end
@@ -92,8 +92,9 @@ def count_neighbors(x,y,cells) #TODO: tell don't ask!
   counter
 end
 #determine the n+1 state of a single cell according to it's neighbors count
-def evolve(cell, neighbors)
-  new_cell = cell
+def evolve(cell)
+  new_cell = cell.clone
+  neighbors=new_cell.neighbors
   if cell.alive?
     case
     when neighbors < 2

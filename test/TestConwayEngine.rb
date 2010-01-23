@@ -54,24 +54,24 @@ class TestConwayEngine < Test::Unit::TestCase
     freshConwayEngine = ConwayEngine.new(WIDTH, HEIGHT)
     cell = Cell.new(true)
     #  1. Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.
-    assert_equal(false, freshConwayEngine.evolve(cell,0).alive?)
-    assert_equal(false, freshConwayEngine.evolve(cell,1).alive?)
+    assert_equal(false, freshConwayEngine.evolve(cell.neighbors=0).alive?)
+    assert_equal(false, freshConwayEngine.evolve(cell.neighbors=1).alive?)
     #     2. Any live cell with more than three live neighbours dies, as if by overcrowding.
-    assert_equal(false, freshConwayEngine.evolve(cell,4).alive?)
-    assert_equal(false, freshConwayEngine.evolve(cell,5).alive?)
-    assert_equal(false, freshConwayEngine.evolve(cell,6).alive?)
-    assert_equal(false, freshConwayEngine.evolve(cell,7).alive?)
-    assert_equal(false, freshConwayEngine.evolve(cell,8).alive?)
+    assert_equal(false, freshConwayEngine.evolve(cell.neighbors=4).alive?)
+    assert_equal(false, freshConwayEngine.evolve(cell.neighbors=5).alive?)
+    assert_equal(false, freshConwayEngine.evolve(cell.neighbors=6).alive?)
+    assert_equal(false, freshConwayEngine.evolve(cell.neighbors=7).alive?)
+    assert_equal(false, freshConwayEngine.evolve(cell.neighbors=8).alive?)
   end
   def test_evolve_live
     freshConwayEngine = ConwayEngine.new(WIDTH, HEIGHT)
     # 3. Any live cell with two or three live neighbours lives on to the next generation.
     cell = Cell.new(true)
-    assert_equal(true, freshConwayEngine.evolve(cell,2).alive?)
-    assert_equal(true, freshConwayEngine.evolve(cell,3).alive?)
+    assert_equal(true, freshConwayEngine.evolve(cell.neighbors=2).alive?)
+    assert_equal(true, freshConwayEngine.evolve(cell.neighbors=3).alive?)
     # 4. Any dead cell with exactly three live neighbours becomes a live cell.
     cell = Cell.new(false)
-    assert_equal(true, freshConwayEngine.evolve(cell,3).alive?)
+    assert_equal(true, freshConwayEngine.evolve(cell.neighbors=3).alive?)
 
   end
   def test_iterate

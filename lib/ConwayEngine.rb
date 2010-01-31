@@ -60,40 +60,38 @@ def iterate()
     if(y > 0 and y <@cells.size-1) #leave border out
       row.each_with_index do |entry, x|
         if(x > 0 and x < row.size-1) #leave border out
-               #divide between two threads 
-                if y % 2 == 0
-                  to_be_processed_one << [x,y]
-                else
-                 to_be_processed_two << [x,y]
-                end
-              
-           
+          #divide between two threads 
+           if y % 2 == 0
+             to_be_processed_one << [x,y]
+           else
+            to_be_processed_two << [x,y]
+           end        
         end
       end
     end
    end
 
 #start working with two threads:
-  evolution_one = Thread.new(to_be_processed_one, @cells) do |list, cells|
-      list.each do |element| 
+  evolution_one = Thread.new(to_be_processed_one, @cells, new_cells) do |pipeline, old_cells, new_cells|
+      pipeline.each do |element| 
          x = element[0]
          y = element[1]
-        neighbor_count = count_neighbors(y,x,cells)
-        new_cells[y][x] = evolve(cells[x][y], neighbor_count)
+        neighbor_count = count_neighbors(y,x,old_cells)
+        new_cells[y][x] = evolve(old_cells[y][x], neighbor_count)
       end
   end
      
-  evolution_two = Thread.new(to_be_processed_two, @cells) do |list, cells|
-      list.each do |element| 
+  evolution_two = Thread.new(to_be_processed_two, @cells, new_cells) do |pipeline, old_cells, new_cells|
+      pipeline.each do |element| 
          x = element[0]
          y = element[1]
-        neighbor_count = count_neighbors(y,x,cells)
-        new_cells[y][x] = evolve(cells[x][y], neighbor_count)
+        neighbor_count = count_neighbors(y,x,old_cells)
+        new_cells[y][x] = evolve(old_cells[y][x], neighbor_count)
       end
   end
     
-  evolution_two.join
   evolution_one.join
+  evolution_two.join
 
   @cells = new_cells.clone
 end

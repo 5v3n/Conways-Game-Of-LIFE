@@ -30,11 +30,11 @@
                     * multi : 22.99 ticks/sec @ 120x50
                 * JRuby 1.4.0 Java 6
                     * single: 60.94 ticks/sec @ 120x50
-                    * multi :     
+                    * multi : 29.93 ticks/sec @ 120x50    
                     
                     
                     
 * System
   * get ruby-opengl running! Seems messed up with ruby 1.8 & 1.9 & corresponding gems
-
+  * why is jruby only using 60 % (1 cpu + 10% of the 2nd one)?
          

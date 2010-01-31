@@ -1,7 +1,7 @@
 #Analyze the ConwayEngine
 
 require 'benchmark'
-require_relative '../lib/ConwayEngine.rb'
+require '../lib/ConwayEngine.rb'
 
 
 if __FILE__ == $0

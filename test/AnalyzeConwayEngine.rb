@@ -6,8 +6,9 @@ require_relative '../lib/ConwayEngine.rb'
 
 if __FILE__ == $0
  
-  freshConwayEngine = ConwayEngine.new(120,50)
-  benchmark = true 
+  freshConwayEngine = ConwayEngine.new(100,50)
+  bmConwayEngine = ConwayEngine.new(120,50)
+  benchmark = false
   runs = 100
   repeats = 10
   
@@ -15,8 +16,8 @@ if __FILE__ == $0
   
   if benchmark
     repeats.times do
-      freshConwayEngine = ConwayEngine.new(120,50)
-      bm_results << Benchmark.measure {  runs.times {freshConwayEngine.iterate()} } 
+      bmConwayEngine = ConwayEngine.new(120,50)
+      bm_results << Benchmark.measure {  runs.times {bmConwayEngine.iterate()} } 
     end
   end
   
@@ -42,7 +43,7 @@ if __FILE__ == $0
   tick = 0
   while true do
     freshConwayEngine.printCells(freshConwayEngine.cells)
-    puts "Just did #{runs} ticks repeated #{repeats} times, which took #{result} secs. We're running about #{(repeats*runs) / result} ticks/sec @ #{freshConwayEngine.cells.first.size}x#{freshConwayEngine.cells.size}" if benchmark
+    puts "Just did #{runs} ticks repeated #{repeats} times, which took #{result} secs. We're running about #{(repeats*runs) / result} ticks/sec @ #{bmConwayEngine.cells.first.size}x#{bmConwayEngine.cells.size}" if benchmark
     puts "Tick #{tick} \nPress 'Q' to quit, return to continue" # TODO fix runs number: seperate runs & repeats in benchmark from the actual generation/tick count. count in ConwayEngine?
     input = gets
     break if "Q\n" == input

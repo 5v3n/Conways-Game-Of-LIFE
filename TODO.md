@@ -25,6 +25,15 @@
                 * multi threaded  :
                     * 52.51 ticks/sec @ 120x50
                     *  0.50 ticks/sec @ 1200x500
+                * JRuby 1.4.0 Java 5
+                    * single: 30.45 ticks/sec @ 120x50
+                    * multi : 22.99 ticks/sec @ 120x50
+                * JRuby 1.4.0 Java 6
+                    * single: 60.94 ticks/sec @ 120x50
+                    * multi :     
+                    
+                    
+                    
 * System
   * get ruby-opengl running! Seems messed up with ruby 1.8 & 1.9 & corresponding gems
 

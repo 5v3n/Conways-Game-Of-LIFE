@@ -66,30 +66,36 @@ def iterate()
                 else
                  to_be_processed_two << [x,y]
                 end
-              #start working with two threads:
-            evolution_one = Thread.new(to_be_processed_one) do |list|
-              list.each do |element| 
-                 y = element[0]
-                 x = element[1]
-                neighbor_count = count_neighbors(y,x,@cells)
-                new_cells[y][x] = evolve(@cells[x][y], neighbor_count)
-              end
-            end
-             
-            evolution_two = Thread.new(to_be_processed_two) do |list|
-              list.each do |element| 
-                 y = element[0]
-                 x = element[1]
-                neighbor_count = count_neighbors(y,x,@cells)
-                new_cells[y][x] = evolve(@cells[x][y], neighbor_count)
-              end
-            end
+              
+           
         end
       end
     end
    end
 
-    @cells = new_cells.clone
+#start working with two threads:
+  evolution_one = Thread.new(to_be_processed_one, @cells) do |list, cells|
+      list.each do |element| 
+         x = element[0]
+         y = element[1]
+        neighbor_count = count_neighbors(y,x,cells)
+        new_cells[y][x] = evolve(cells[x][y], neighbor_count)
+      end
+  end
+     
+  evolution_two = Thread.new(to_be_processed_two, @cells) do |list, cells|
+      list.each do |element| 
+         x = element[0]
+         y = element[1]
+        neighbor_count = count_neighbors(y,x,cells)
+        new_cells[y][x] = evolve(cells[x][y], neighbor_count)
+      end
+  end
+    
+  evolution_two.join
+  evolution_one.join
+
+  @cells = new_cells.clone
 end
 
 

@@ -1,6 +1,6 @@
 #Unit tests for the ConwayEngine
 
-require_relative '../lib/ConwayEngine.rb'
+require '../lib/ConwayEngine.rb'
 require 'test/unit'
 
 class TestConwayEngine < Test::Unit::TestCase

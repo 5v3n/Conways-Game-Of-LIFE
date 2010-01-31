@@ -1,7 +1,7 @@
 #Analyze the ConwayEngine
 
 require 'benchmark'
-require_relative '../lib/ConwayEngine.rb'
+require '../lib/ConwayEngine.rb'
 
 
 if __FILE__ == $0
@@ -9,14 +9,14 @@ if __FILE__ == $0
   freshConwayEngine = ConwayEngine.new(100,50)
   bmConwayEngine = ConwayEngine.new(120,50)
   benchmark = true
-  runs = 10
-  repeats = 2
+  runs = 100
+  repeats = 10
   
   bm_results = []
   
   if benchmark
     repeats.times do
-      bmConwayEngine = ConwayEngine.new(1200,500)
+      bmConwayEngine = ConwayEngine.new(120,50)
       bm_results << Benchmark.measure {  runs.times {bmConwayEngine.iterate()} } 
     end
   end

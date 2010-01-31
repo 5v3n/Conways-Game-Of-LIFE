@@ -19,8 +19,12 @@
    * multithreading
         * since the cells are evolving from a constant grid, there's massive potential in parallel processing
             * performance-impact? ("more" precedural)
-                * single threaded : 69.58 ticks/sec @ 120x50
-                * multi threaded  : 52.51 ticks/sec @ 120x50
+                * single threaded
+                    * 69.58 ticks/sec @ 120x50
+                    *
+                * multi threaded  :
+                    * 52.51 ticks/sec @ 120x50
+                    *  0.50 ticks/sec @ 1200x500
 * System
   * get ruby-opengl running! Seems messed up with ruby 1.8 & 1.9 & corresponding gems
 * fix "benchmark" showing stats every run, not only if the benchmark was involved

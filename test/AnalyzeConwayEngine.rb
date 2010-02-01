@@ -9,14 +9,14 @@ if __FILE__ == $0
   freshConwayEngine = ConwayEngine.new(100,50)
   bmConwayEngine = ConwayEngine.new(120,50)
   benchmark = true
-  runs = 100
-  repeats = 10
+  runs = 10
+  repeats = 3
   
   bm_results = []
   
   if benchmark
     repeats.times do
-      bmConwayEngine = ConwayEngine.new(120,50)
+      bmConwayEngine = ConwayEngine.new(1200,500)
       bm_results << Benchmark.measure {  runs.times {bmConwayEngine.iterate()} } 
     end
   end

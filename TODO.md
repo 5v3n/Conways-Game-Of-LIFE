@@ -43,5 +43,5 @@
                     
 * System
   * get ruby-opengl running! Seems messed up with ruby 1.8 & 1.9 & corresponding gems
-  * why is jruby only using 60 % (1 cpu + 10% of the 2nd one)?
+
          

@@ -20,7 +20,7 @@
         * since the cells are evolving from a constant grid, there's massive potential in parallel processing
             * performance-impact? ("more" precedural)
                 * single threaded
-                    * 69.58 ticks/sec @ 120x50
+                    * 70.31 ticks/sec @ 120x50
                     *  0.64 ticks/sec @ 1200x500
                 * multi threaded  :
                     * 52.51 ticks/sec @ 120x50
@@ -43,5 +43,5 @@
                     
 * System
   * get ruby-opengl running! Seems messed up with ruby 1.8 & 1.9 & corresponding gems
-  * why is jruby only using 60 % (1 cpu + 10% of the 2nd one)?
+
          

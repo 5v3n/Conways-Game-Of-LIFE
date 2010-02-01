@@ -53,34 +53,36 @@ end
 # calculate the generation n+1 
 def iterate()
    new_cells = Array.new(@cells.size,false).map!{ Array.new(@cells.first.size,false) }
-   to_be_processed_one = []
-   to_be_processed_two = []
-   
+    
    #start working with two threads:
   evolution_one = Thread.new(@cells, new_cells) do |old_cells, new_cells|
-         @cells.each_with_index do |row, y|
-    if(y > 0 and y <@cells.size-1 and y < (@cells.size/2)) #leave border out & divide threads
-      row.each_with_index do |entry, x|
-        if(x > 0 and x < row.size-1) #leave border out
-          neighbor_count = count_neighbors(y,x,old_cells)
-          new_cells[y][x] = evolve(old_cells[y][x], neighbor_count)
-        end   
+    cell_size = old_cells.size
+    border=cell_size/2
+    old_cells.each_with_index do |row, y|
+      if(y > 0 and y <cell_size-1 and y < border) #leave border out & divide threads
+        row.each_with_index do |entry, x|
+          if(x > 0 and x < row.size-1) #leave border out
+            neighbor_count = count_neighbors(y,x,old_cells)
+            new_cells[y][x] = evolve(old_cells[y][x], neighbor_count)
+          end   
+        end
       end
     end
-  end
   end
   
-    evolution_two = Thread.new(@cells, new_cells) do |old_cells, new_cells|
-         @cells.each_with_index do |row, y|
-    if(y > 0 and y <@cells.size-1 and y >= (@cells.size/2)) #leave border out & divide threads
-      row.each_with_index do |entry, x|
-        if(x > 0 and x < row.size-1) #leave border out
-          neighbor_count = count_neighbors(y,x,old_cells)
-          new_cells[y][x] = evolve(old_cells[y][x], neighbor_count)
-        end   
+  evolution_two = Thread.new(@cells, new_cells) do |old_cells, new_cells|
+    cell_size = old_cells.size
+    border=cell_size/2
+    old_cells.each_with_index do |row, y|
+      if(y > 0 and y <cell_size-1 and y >= border) #leave border out & divide threads
+        row.each_with_index do |entry, x|
+          if(x > 0 and x < row.size-1) #leave border out
+            neighbor_count = count_neighbors(y,x,old_cells)
+            new_cells[y][x] = evolve(old_cells[y][x], neighbor_count)
+          end   
+        end
       end
     end
-  end
   end
       
       

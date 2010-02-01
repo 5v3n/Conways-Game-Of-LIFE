@@ -53,8 +53,9 @@ end
 # calculate the generation n+1 
 def iterate()
    new_cells = Array.new(@cells.size,false).map!{ Array.new(@cells.first.size,false) }
+   cell_size = @cells.size
    @cells.each_with_index do |row, y|
-     if(y > 0 and y <@cells.size-1) #leave border out
+     if(y > 0 and y <cell_size-1) #leave border out
        row.each_with_index do |entry, x|
          if(x > 0 and x < row.size-1) #leave border out
            neighbor_count = count_neighbors(y,x,@cells)

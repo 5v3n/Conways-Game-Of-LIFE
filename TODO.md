@@ -25,12 +25,18 @@
                 * multi threaded  :
                     * 52.51 ticks/sec @ 120x50
                     *  0.50 ticks/sec @ 1200x500
-                * JRuby 1.4.0 Java 5
-                    * single: 30.45 ticks/sec @ 120x50
-                    * multi : 22.99 ticks/sec @ 120x50
-                * JRuby 1.4.0 Java 6
-                    * single: 60.94 ticks/sec @ 120x50
-                    * multi : 29.93 ticks/sec @ 120x50    
+                * multi threaded on the fly (no 'pipeline')
+                    * 66.59ticks/sec @ 120x50
+                    *  0.63 ticks/sec @ 1200x500
+                * JRuby    
+                    * JRuby 1.4.0 Java 5
+                        * single    : 30.45 ticks/sec @ 120x50
+                        * multi     : 22.99 ticks/sec @ 120x50
+                    * JRuby 1.4.0 Java 6
+                        * single    : 60.94 ticks/sec @ 120x50
+                        * multi     : 29.93 ticks/sec @ 120x50
+                        * multi otf : 80.44 ticks/sec @ 120x50
+                        * multi otf :  0.92 ticks/sec @ 1200x500
                     
                     
                     

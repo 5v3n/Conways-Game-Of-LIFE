@@ -9,8 +9,8 @@ if __FILE__ == $0
   freshConwayEngine = ConwayEngine.new(100,50)
   bmConwayEngine = ConwayEngine.new(120,50)
   benchmark = true
-  runs = 100
-  repeats = 10
+  runs = 1
+  repeats = 1
   
   bm_results = []
   

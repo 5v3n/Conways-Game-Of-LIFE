@@ -14,7 +14,7 @@ As I progress through the features of ruby, this implementation of LIFE evolves.
     * right now it's in the "Made it work" state
     * still missing some fudamental ruby skills
         * error handling
-        * mixin
+        * mixins
         * ...
 * logic for computing the Conway evolution
 * view to display the ticks/generations
@@ -23,7 +23,12 @@ As I progress through the features of ruby, this implementation of LIFE evolves.
     * exists in the `cleaner_oo` branch
         * nice design but slows down the game by factor 2
     * branch `master`
-        * rough approach, but _fast_
+        * rough / more procedural approach, but _fast_
 * ui
     * cli
+    
+    
+Check out the TODO.md for more details. If you feel like giving feedback - right on!
+
+
     

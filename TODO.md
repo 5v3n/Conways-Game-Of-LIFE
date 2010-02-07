@@ -18,6 +18,7 @@
                 * "cleaner" oo      : 30.57 ticks/sec @ 120x50
    * multithreading
         * since the cells are evolving from a constant grid, there's massive potential in parallel processing
+        * see [here](http://www.igvita.com/2008/11/13/concurrency-is-a-myth-in-ruby/]) for details on concurrency in ruby
             * performance-impact? ("more" precedural)
                 * single threaded
                     * 70.31 ticks/sec @ 120x50
@@ -38,6 +39,8 @@
                         * multi     : 29.93 ticks/sec @ 120x50
                         * multi otf : 85.69 ticks/sec @ 120x50
                         * multi otf :  0.88 ticks/sec @ 1200x500
+                * MacRuby
+                    * is there a difference in the concurrency handling?
                     
                     
                     

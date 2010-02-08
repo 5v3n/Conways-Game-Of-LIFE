@@ -5,51 +5,36 @@ require '../lib/ConwayEngine.rb'
 
 
 if __FILE__ == $0
- 
-  freshConwayEngine = ConwayEngine.new(100,50)
-  bmConwayEngine = ConwayEngine.new(120,50)
-  benchmark = true
-  runs = 10
-  repeats = 100
-  
-  bm_results = []
-  
-  if benchmark
-    repeats.times do
-      bmConwayEngine = ConwayEngine.new(120,50)
-      bm_results << Benchmark.measure {  runs.times {bmConwayEngine.iterate()} } 
+  repeats = 3
+  # use benchmark with custom results: total & average time
+  Benchmark.benchmark(" "*25 + Benchmark::CAPTION, 25, Benchmark::FMTSTR, ">avg small", ">avg big", ">tps small", ">tps big") do |x|
+    bmConwayEngine = ConwayEngine.new(120,50)
+    label_small = "#{bmConwayEngine.width}x#{bmConwayEngine.height}, #{repeats} times"
+    t_small = x.report(label_small)   do
+      repeats.times {bmConwayEngine.iterate()}
     end
-  end
+    
+    
+    
+    bmConwayEngine = ConwayEngine.new(1200,500)
+    label_big="#{bmConwayEngine.width}x#{bmConwayEngine.height}, #{repeats} times"
+    t_big = x.report(label_big)   do
+      repeats.times {bmConwayEngine.iterate()}
+    end
+    
+    avg_small = t_small / repeats
+    avg_big   = t_big / repeats
+    #tps_small = repeats * (1.0 / t_small)
+    #tps_big   = repeats / t_big 
+    
+    [avg_small, avg_big]#, tps_small, tps_big]
+    
+    # divide result with FixNum works, but not vice versa...
+
+   end
+
   
-  result = 0
-  bm_results.each do |entry|
-    result += entry.real
-  end
-  
-    ten_cell_row =[
-     [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
-     [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
-     [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
-     [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
-     [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
-     [false,false,false,false,false,false,false,false,false,false,true,true,true,true,true,true,true,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
-     [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
-     [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
-     [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
-     [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
-     [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
-     ]
+ 
    
-  tick = 0
-  while true do
-    freshConwayEngine.printCells(freshConwayEngine.cells)
-    puts "Just did #{runs} ticks repeated #{repeats} times, which took #{result} secs. We're running about #{(repeats*runs) / result} ticks/sec @ #{bmConwayEngine.cells.first.size}x#{bmConwayEngine.cells.size}" if benchmark
-    puts "Tick #{tick} \nPress 'Q' to quit, return to continue" # TODO fix runs number: seperate runs & repeats in benchmark from the actual generation/tick count. count in ConwayEngine?
-    input = gets
-    break if "Q\n" == input
-    freshConwayEngine.iterate()
-    system("clear")
-    tick += 1
-  end
   
 end

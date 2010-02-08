@@ -41,6 +41,7 @@
                         * multi otf :  0.88 ticks/sec @ 1200x500
                 * MacRuby
                     * is there a difference in the concurrency handling?
+                * rb-slave (macports package. [sourceforge](http://rubyforge.org/projects/codeforpeople/))
                     
                     
                     

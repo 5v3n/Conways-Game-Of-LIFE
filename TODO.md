@@ -41,11 +41,14 @@
                         * multi otf :  0.88 ticks/sec @ 1200x500
                 * MacRuby
                     * is there a difference in the concurrency handling?
-                * rb-slave (macports package. [sourceforge](http://rubyforge.org/projects/codeforpeople/))
+                * rb-slave (macports package / [sourceforge](http://rubyforge.org/projects/codeforpeople/))
                     
                     
                     
 * System
   * get ruby-opengl running! Seems messed up with ruby 1.8 & 1.9 & corresponding gems
-
+        * opengl-visualization!
+        
+* Merge TODO / README or find a way to share them between branches...
+* use Benchmark.bmbm
          

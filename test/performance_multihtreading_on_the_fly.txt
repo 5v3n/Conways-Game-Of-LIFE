@@ -1,0 +1,15 @@
+(multithreading_on_the_fly)$ jruby AnalyzeConwayEngine.rb 100 && ruby1.9 AnalyzeConwayEngine.rb 100
+                               user     system      total        real
+120x50, 100 times          3.513000   0.000000   3.513000 (  3.423000)
+1200x500, 100 times       98.173000   0.000000  98.173000 ( 98.173000)
+Average tps small         28.465699                       ( 29.214141)
+Average tps big            1.018610                       (  1.018610)
+>avg small                 0.035130   0.000000   0.035130 (  0.034230)
+>avg big                   0.981730   0.000000   0.981730 (  0.981730)
+                               user     system      total        real
+120x50, 100 times          1.480000   0.020000   1.500000 (  1.491557)
+1200x500, 100 times      153.090000   0.670000 153.760000 (153.945244)
+Average tps small         67.567568                       ( 67.044030)
+Average tps big            0.653211                       (  0.649582)
+>avg small                 0.014800   0.000200   0.015000 (  0.014916)
+>avg big                   1.530900   0.006700   1.537600 (  1.539452)

@@ -1,0 +1,15 @@
+(master)$ jruby AnalyzeConwayEngine.rb 100 && ruby1.9 AnalyzeConwayEngine.rb 100
+                               user     system      total        real
+120x50, 100 times          2.781000   0.000000   2.781000 (  2.729000)
+1200x500, 100 times      159.265000   0.000000 159.265000 (159.265000)
+Average tps small         35.958287                       ( 36.643458)
+Average tps big            0.627884                       (  0.627884)
+>avg small                 0.027810   0.000000   0.027810 (  0.027290)
+>avg big                   1.592650   0.000000   1.592650 (  1.592650)
+                               user     system      total        real
+120x50, 100 times          1.450000   0.010000   1.460000 (  1.456409)
+1200x500, 100 times      150.800000   0.420000 151.220000 (151.415787)
+Average tps small          68.965517                      ( 68.662032)
+Average tps big            0.663130                       (  0.660433)
+>avg small                 0.014500   0.000100   0.014600 (  0.014564)
+>avg big                   1.508000   0.004200   1.512200 (  1.514158)

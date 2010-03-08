@@ -11,11 +11,13 @@ The universe of the Game of Life is an infinite two-dimensional orthogonal grid 
 The initial pattern constitutes the seed of the system. The first generation is created by applying the above rules simultaneously to every cell in the seed—births and deaths happen simultaneously, and the discrete moment at which this happens is sometimes called a tick (in other words, each generation is a pure function of the one before). The rules continue to be applied repeatedly to create further generations.
 =end
 #TODO: private functions - but what about the unit tests??
-  attr_accessor :cells
+  attr_accessor :cells, :height, :width
 #Create a new ConwayEngine. Pass width and height of the cell world
 def initialize(width=30, height=30, random=true, random_from=[true,false].to_a)
-  #create an array 
+  #create an array
   @cells = Array.new()
+  @height= height
+  @width = width
   border = false
   
    #add 'height' arrays of size 'width'

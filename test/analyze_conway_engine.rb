@@ -1,7 +1,7 @@
 #Analyze the ConwayEngine
 
 require 'benchmark'
-require '../lib/ConwayEngine.rb'
+require_relative '../lib/conway_app.rb'
 
  def fps array
    array.map { |item| 1.0/item unless item==nil }
@@ -14,18 +14,18 @@ if __FILE__ == $0
   
   # use benchmark with custom results: total & average time
   Benchmark.benchmark(" "*25 + Benchmark::CAPTION, 25, Benchmark::FMTSTR, ">avg small", ">avg big", ">tps small", ">tps big") do |x|
-    bmConwayEngine = ConwayEngine.new(120,50)
-    label_small = "#{bmConwayEngine.width}x#{bmConwayEngine.height}, #{repeats} times"
+    bmConwayApp = GameOfLife.new(120,50)
+    label_small = "#{bmConwayApp.width}x#{bmConwayApp.height}, #{repeats} times"
     t_small = x.report(label_small)   do
-      repeats.times {bmConwayEngine.iterate()}
+      repeats.times {bmConwayApp.iterate()}
     end
     
     
     
-    bmConwayEngine = ConwayEngine.new(1200,500)
-    label_big="#{bmConwayEngine.width}x#{bmConwayEngine.height}, #{repeats} times"
+    bmConwayApp = GameOfLife.new(1200,500)
+    label_big="#{bmConwayApp.width}x#{bmConwayApp.height}, #{repeats} times"
     t_big = x.report(label_big)   do
-      repeats.times {bmConwayEngine.iterate()}
+      repeats.times {bmConwayApp.iterate()}
     end
     
     avg_small = t_small / repeats

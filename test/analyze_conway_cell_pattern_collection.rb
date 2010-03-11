@@ -1,4 +1,4 @@
-require_relative '../lib/ConwayCellPatternCollection.rb'
+require_relative '../lib/pattern/conway_cell_pattern_collection.rb'
 
 if __FILE__ == $0
 begin

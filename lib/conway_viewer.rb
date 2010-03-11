@@ -7,6 +7,6 @@ module ConwayViewer
       print ". " if element == false
     end
      print "\n"
-  end
-end
+    end
+ end
 end

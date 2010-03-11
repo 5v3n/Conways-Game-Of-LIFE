@@ -1,19 +1,19 @@
 #Unit tests for the ConwayEngine
 
-require_relative '../lib/ConwayEngine.rb'
+require_relative '../lib/conway_app.rb'
 require 'test/unit'
 
 class TestConwayEngine < Test::Unit::TestCase
   def test_initialize
     x=60
     y=90
-    freshConwayEngine = ConwayEngine.new()
-    assert_equal(freshConwayEngine.cells.size, 30)
-    assert_equal(freshConwayEngine.cells[0].size, 30)
+    freshConway = GameOfLife.new()
+    assert_equal(freshConway.cells.size, 30)
+    assert_equal(freshConway.cells[0].size, 30)
     
-    freshConwayEngine = ConwayEngine.new(x,y)
-    assert_equal(freshConwayEngine.cells.size, y)
-    assert_equal(freshConwayEngine.cells[0].size, x)   
+    freshConway = GameOfLife.new(x,y)
+    assert_equal(freshConway.cells.size, y)
+    assert_equal(freshConway.cells[0].size, x)
   end
 
   def test_count_neighbors_full
@@ -22,7 +22,7 @@ class TestConwayEngine < Test::Unit::TestCase
     [true,true,true],
     [true,true,true], 
     ]
-    freshConwayEngine = ConwayEngine.new()
+    freshConwayEngine = GameOfLife.new()
     freshConwayEngine.cells = test_cells
     assert_equal(8, freshConwayEngine.count_neighbors(1,1, test_cells))
   end
@@ -32,7 +32,7 @@ class TestConwayEngine < Test::Unit::TestCase
     [false,true,false],
     [false,false,false], 
     ]
-          freshConwayEngine = ConwayEngine.new()
+          freshConwayEngine = GameOfLife.new()
     freshConwayEngine.cells = test_cells
     assert_equal(0, freshConwayEngine.count_neighbors(1,1, test_cells))
   end
@@ -42,13 +42,13 @@ class TestConwayEngine < Test::Unit::TestCase
     [false,false,false],
     [false,false,true], 
     ]
-    freshConwayEngine = ConwayEngine.new()
+    freshConwayEngine = GameOfLife.new()
     freshConwayEngine.cells = test_cells
     assert_equal(2, freshConwayEngine.count_neighbors(1,1, test_cells))
   end
 
   def test_evolve_die
-    freshConwayEngine = ConwayEngine.new()
+    freshConwayEngine = GameOfLife.new()
     cell = true
     #  1. Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.
     assert_equal(false, freshConwayEngine.evolve(cell,0))
@@ -61,7 +61,7 @@ class TestConwayEngine < Test::Unit::TestCase
     assert_equal(false, freshConwayEngine.evolve(cell,8))
   end
   def test_evolve_live
-    freshConwayEngine = ConwayEngine.new()
+    freshConwayEngine = GameOfLife.new()
     # 3. Any live cell with two or three live neighbours lives on to the next generation.
     cell = true
     assert_equal(true, freshConwayEngine.evolve(cell,2))
@@ -100,7 +100,7 @@ class TestConwayEngine < Test::Unit::TestCase
      [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
      ]
       
-      freshConwayEngine = ConwayEngine.new()
+      freshConwayEngine = GameOfLife.new()
       freshConwayEngine.cells = ten_cell_row
       freshConwayEngine.iterate()
       assert_equal(freshConwayEngine.cells, ten_cell_row_next)

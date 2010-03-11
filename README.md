@@ -14,8 +14,7 @@ As I progress through the features of ruby, this implementation of LIFE evolves.
     * right now it's in the "Made it work" state
     * still missing some fudamental ruby skills
         * error handling
-        * mixins
-        * modules
+        * modules & mixins (still a bit uncertain about proper usage... tips welcome)
 * logic for computing the Conway evolution
 * view to display the ticks/generations
     * ascii representation

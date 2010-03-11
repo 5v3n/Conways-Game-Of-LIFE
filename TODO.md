@@ -1,5 +1,9 @@
 # TODO #
-
+* modules & mixins
+  * integrated the mechanism, yes!
+  * since I only cut the original class into pieces, I still have to think about
+    * decoulping (inter-module dependencies, e.g.: shared instance variables)
+    * usage of mixin better than inheritance in this case?
 * design a decorator mechanism for printing
   * e.g. conwayTextPrinter(myConwayEngine), conwayGUI(myConwayEngine), etc.
   * do I need a classic single inheritance decorator at all (mixins!)?

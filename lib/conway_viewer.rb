@@ -9,4 +9,6 @@ module ConwayViewer
      print "\n"
     end
  end
+ #TODO implement opengl display
+ #OPTIMIZE think about...a mechanism to decide between textual & graphical / opengl viewer
 end

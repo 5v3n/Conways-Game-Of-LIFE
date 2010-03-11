@@ -14,6 +14,7 @@ class GameOfLife
     #create an array
     create_grid(width, height, random, random_from)
   end
+  #start the Game of Life
   def start
     tick = 1
     while true do
@@ -27,6 +28,8 @@ class GameOfLife
     end
 
   end
+  #TODO how about a step() method?
+  #TODO think about... if start()/stop()/step() belong to the conway_app, or the conway_engine
 
 end
 

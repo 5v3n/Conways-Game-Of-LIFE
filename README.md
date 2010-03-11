@@ -15,7 +15,7 @@ As I progress through the features of ruby, this implementation of LIFE evolves.
     * still missing some fudamental ruby skills
         * error handling
         * mixins
-        * ...
+        * modules
 * logic for computing the Conway evolution
 * view to display the ticks/generations
     * ascii representation
@@ -26,6 +26,7 @@ As I progress through the features of ruby, this implementation of LIFE evolves.
         * rough / more procedural approach, but _fast_
 * ui
     * cli
+    * ruby-opengl version planned
     
     
 Check out the TODO.md for more details. If you feel like giving feedback - right on!

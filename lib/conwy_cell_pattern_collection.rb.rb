@@ -1,6 +1,6 @@
 # a collection of pattern for Conway's game of life.
 # syntax follows the Life Lexicon  (http://www.argentum.freeserve.co.uk/lex_home.htm)
-class CellPatternCollection
+module CellPatternCollection
   #-- TODO figure out how to use "real" constants!
   GLIDER = [
             "***",

@@ -46,8 +46,7 @@
                     
                     
 * System
-  * get ruby-opengl running! Seems messed up with ruby 1.8 & 1.9 & corresponding gems
-        * opengl-visualization!
+         * opengl-visualization!
         
 * Merge TODO / README or find a way to share them between branches...
 * use Benchmark.bmbm

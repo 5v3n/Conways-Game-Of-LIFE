@@ -9,10 +9,14 @@ class GameOfLife
   include ConwayModel
   include ConwayViewer
 
-  #Create a new ConwayEngine. Pass width and height of the cell world
-  def initialize(width=30, height=30, random=true, random_from=[true,false].to_a)
+  #Create a new GameOfLife.
+  #
+  #Pass width and height of the cell world, whether it should be filled with random life & the seed to generate the life from
+  #
+  #
+  def initialize(width=30, height=30, random=true, random_seed=[true,false].to_a)
     #create an array
-    create_grid(width, height, random, random_from)
+    create_grid(width, height, random, random_seed)
   end
   #start the Game of Life
   def start
@@ -34,8 +38,8 @@ class GameOfLife
 end
 
 if $0 == __FILE__
-  width = 80
-  height = 50
+  width = 30
+  height = 30
   width = ARGV[0].to_i unless ARGV[0] == nil
   height = ARGV[1].to_i unless ARGV[1] == nil
   app = GameOfLife.new(width, height)

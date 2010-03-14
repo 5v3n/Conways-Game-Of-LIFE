@@ -9,23 +9,23 @@ The universe of the Game of Life is an infinite two-dimensional orthogonal grid 
 The initial pattern constitutes the seed of the system. The first generation is created by applying the above rules simultaneously to every cell in the seed—births and deaths happen simultaneously, and the discrete moment at which this happens is sometimes called a tick (in other words, each generation is a pure function of the one before). The rules continue to be applied repeatedly to create further generations.
 =end
 module ConwayEngine
-    def iterate()
-       new_cells = Array.new(@cells.size,false).map!{ Array.new(@cells.first.size,false) }
-       cell_size = @cells.size
-       @cells.each_with_index do |row, y|
+    def ConwayEngine.iterate(cells)
+       new_cells = Array.new(cells.size,false).map!{ Array.new(cells.first.size,false) }
+       cell_size = cells.size
+       cells.each_with_index do |row, y|
          if(y > 0 and y <cell_size-1) #leave border out
            row.each_with_index do |entry, x|
              if(x > 0 and x < row.size-1) #leave border out
-               neighbor_count = count_neighbors(y,x,@cells)
+               neighbor_count = count_neighbors(y,x,cells)
                new_cells[y][x] = evolve(entry, neighbor_count)
              end
            end
          end
        end
-       @cells = new_cells.clone
+       cells = new_cells.clone
     end
     #Count the neighbors of a 2d orthogonal grid. Uses the concept of the N_8(P)-neighborhood (Moore-neighborhood)
-    def count_neighbors(x,y,cells) #TODO: tell don't ask!
+    def ConwayEngine.count_neighbors(x,y,cells) #TODO: tell don't ask!
       counter=0
       counter += 1 if cells[x+1][y-1]
       counter += 1 if cells[x+1][y]
@@ -39,7 +39,7 @@ module ConwayEngine
       counter
     end
     #determine the n+1 state of a single cell according to it's neighbors count
-    def evolve(cell, neighbors)
+    def ConwayEngine.evolve(cell, neighbors)
       new_cell = cell
       if cell==true
         case

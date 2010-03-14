@@ -22,3 +22,14 @@ Average tps small          69.444444                       (  68.264556)
 Average tps big            0.661419                       (  0.653588)
 >avg small                 0.014400   0.000200   0.014600 (  0.014649)
 >avg big                   1.511900   0.011600   1.523500 (  1.530017)
+after refactoring modules (removing instance vars & attr_accessors)(20100314)
+(master)$ ruby1.9 analyze_conway_app.rb 100
+                               user     system      total        real
+120x50, 100 times          1.430000   0.000000   1.430000 (  1.435795)
+Average tps small          69.930070                       (  69.647822)
+1200x500, 100 times      149.350000   0.420000 149.770000 (149.852394)
+Average tps big            0.669568                       (  0.667323)
+>avg small                 0.014300   0.000000   0.014300 (  0.014358)
+>avg big                   1.493500   0.004200   1.497700 (  1.498524)
+
+

@@ -18,7 +18,8 @@ As I progress through the features of ruby, this implementation of LIFE evolves.
 * logic for computing the Conway evolution
 * view to display the ticks/generations
     * ascii representation
-* data model
+    * graphical repr. in progress
+* oo data model
     * exists in the `cleaner_oo` branch
         * nice design but slows down the game by factor 2
     * branch `master`

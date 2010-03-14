@@ -4,10 +4,13 @@ class GameOfLife
   require_relative 'conway_engine'
   require_relative 'conway_model'
   require_relative 'conway_viewer'
+ 
+#  include ConwayEngine
+#  include ConwayModel
+#  include ConwayViewer
 
-  include ConwayEngine
-  include ConwayModel
-  include ConwayViewer
+  attr_accessor :cells, :height, :width
+
 
   #Create a new GameOfLife.
   #
@@ -15,20 +18,27 @@ class GameOfLife
   #
   #
   def initialize(width=30, height=30, random=true, random_seed=[true,false].to_a)
+
+    @width=width
+    @height=height
+
     #create an array
-    create_grid(width, height, random, random_seed)
+    @cells = ConwayModel::create_grid(width, height, random, random_seed)
+  end
+  def iterate()
+    @cells=ConwayEngine::iterate(self.cells)
   end
   #start the Game of Life
   def start
     tick = 1
     while true do
-    to_s()
-    puts "Tick #{tick} \nPress 'Q' to quit, return to continue"
-    input = STDIN.gets
-    break if "Q\n" == input
-    iterate()
-    system("clear")
-    tick += 1
+      ConwayViewer::to_s(self.cells)
+      puts "Tick #{tick} \nPress 'Q' to quit, return to continue"
+      input = STDIN.gets
+      break if "Q\n" == input
+      iterate()
+      system("clear")
+      tick += 1
     end
 
   end

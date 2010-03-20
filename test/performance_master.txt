@@ -13,7 +13,7 @@ Average tps small          68.965517                      ( 68.662032)
 Average tps big            0.663130                       (  0.660433)
 >avg small                 0.014500   0.000100   0.014600 (  0.014564)
 >avg big                   1.508000   0.004200   1.512200 (  1.514158)
-after introducing modules & mixins (20100311):
+---after introducing modules & mixins (20100311):
 (master)$ ruby1.9 analyze_conway_engine.rb 100
                                user     system      total        real
 120x50, 100 times          1.440000   0.020000   1.460000 (  1.464889)
@@ -22,7 +22,7 @@ Average tps small          69.444444                       (  68.264556)
 Average tps big            0.661419                       (  0.653588)
 >avg small                 0.014400   0.000200   0.014600 (  0.014649)
 >avg big                   1.511900   0.011600   1.523500 (  1.530017)
-after refactoring modules (removing instance vars & attr_accessors)(20100314)
+---after refactoring modules (removing instance vars & attr_accessors)(20100314)
 (master)$ ruby1.9 analyze_conway_app.rb 100
                                user     system      total        real
 120x50, 100 times          1.430000   0.000000   1.430000 (  1.435795)
@@ -31,5 +31,15 @@ Average tps small          69.930070                       (  69.647822)
 Average tps big            0.669568                       (  0.667323)
 >avg small                 0.014300   0.000000   0.014300 (  0.014358)
 >avg big                   1.493500   0.004200   1.497700 (  1.498524)
+---after installing Mac OS X 10.6:
+(master) $ ruby1.9 analyze_conway_app.rb 100
+                               user     system      total        real
+120x50, 100 times          0.940000   0.010000   0.950000 (  0.957685)
+Average tps small          106.382979                       (  104.418468)
+1200x500, 100 times       99.100000   0.340000  99.440000 (100.064042)
+Average tps big            1.009082                       (  0.999360)
+>avg small                 0.009400   0.000100   0.009500 (  0.009577)
+>avg big                   0.991000   0.003400   0.994400 (  1.000640)
+
 
 

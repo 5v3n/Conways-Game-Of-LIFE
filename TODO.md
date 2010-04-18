@@ -47,7 +47,9 @@
                     
                     
 * System
-         * opengl-visualization!
+         * opengl-visualization
+            * uses 'n' for next generation, esc key to exit
+            * implement proper gui
         
 * Merge TODO / README or find a way to share them between branches...
 * use Benchmark.bmbm

@@ -1,6 +1,6 @@
 # Viewer for Conway's game of Life models
 module ConwayViewer
-  #string representation of the cell
+  #string representation of the cell grid
   def ConwayViewer.to_s(cells)
   cells.each do |row|
     row.each do |element|
@@ -10,6 +10,5 @@ module ConwayViewer
      print "\n"
     end
   end
-  #TODO implement opengl display
-  #TODO OPTIMIZE think about...a mechanism to decide between textual & graphical / opengl viewer
-end
+
+ end

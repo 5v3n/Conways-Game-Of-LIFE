@@ -1,0 +1,14 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    mkrf (0.2.3)
+    rake (0.8.7)
+    ruby-opengl (0.60.1)
+      mkrf (>= 0.2.0)
+      rake
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  ruby-opengl

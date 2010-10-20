@@ -1,7 +1,7 @@
 #Analyze the ConwayEngine
 
 require 'benchmark'
-require_relative '../lib/conway_app.rb'
+require File.join(File.dirname(__FILE__),  '..', 'lib', 'conway_app.rb')
 
  def fps array
    array.map { |item| 1.0/item unless item==nil }

@@ -1,6 +1,6 @@
 #Unit tests for the ConwayEngine
 
-require_relative '../lib/conway_app.rb'
+require File.join(File.dirname(__FILE__),  '..','lib','conway_app.rb')
 require 'test/unit'
 
 class TestConwayEngine < Test::Unit::TestCase

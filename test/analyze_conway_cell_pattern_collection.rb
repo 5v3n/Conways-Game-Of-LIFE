@@ -1,6 +1,6 @@
 # Testing Ruby's capabilities to create constants - which I'm  not quite
 # comfortable with, yet.
-require_relative '../lib/pattern/conway_cell_pattern_collection.rb'
+require File.join(File.dirname(__FILE__),  '..','lib','pattern','conway_cell_pattern_collection.rb')
 
 if __FILE__ == $0
 begin

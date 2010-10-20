@@ -1,9 +1,9 @@
 #Conway's game of Life
 class GameOfLife
 
-  require_relative 'conway_engine'
-  require_relative 'conway_model'
-  require_relative 'conway_viewer_open_gl'
+  require File.join(File.dirname(__FILE__),  'conway_engine')
+  require File.join(File.dirname(__FILE__),  'conway_model')
+  require File.join(File.dirname(__FILE__),  'conway_viewer_open_gl')
  
 #  include ConwayEngine
 #  include ConwayModel

@@ -1,5 +1,5 @@
 require 'opengl'
-require 'conway_viewer'
+require File.join(File.dirname(__FILE__),  'conway_viewer')
 
 # Display a Conway's Game Of Life in OpenGL.
 #
